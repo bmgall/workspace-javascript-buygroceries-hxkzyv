@@ -12,14 +12,23 @@ $('.hot').each(function () {
 $('#one').next().next().text('milk');
 // add a new element by clicking the plus sign
 $('#todo').append('<li>candy</li>');
+$('#todo').append('<li>cake</li>');
 
 // before and after are for siblings
 // append and prepend are for parent
+
+$('#add').click(addElement);
 
 function addElement() {
   // add a new element
   // add a input text box
   // whenever the user are done add the element
+  $('#todo').append('<li><input type="text"></li>');
+  $('input').blur(function() {
+    $(this).parent().addClass('cool');
+    var userInput = $(this).val();
+    $(this).parent().text(userInput);
+  });
 }
 
 // bind click with the event handler
@@ -30,12 +39,20 @@ function changeStyle() {
   if ($(this).hasClass('cool')) {
     $(this).removeClass('cool');
     $(this).addClass('complete');
+  }else if ($(this).hasClass('complete')) {
+    $(this).removeClass('complete');
+    $(this).addClass('cool');
+  }else{
+    $(this).addClass('cool');
   }
 }
+
+
 
 // delete complete element by clicking the trash can
 document.getElementById('remove').addEventListener('click', removeElement);
 
 function removeElement() {
   // remove the marked elements  -- element with style complete
+  $('li.complete').remove();
 }
